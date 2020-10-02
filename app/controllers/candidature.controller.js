@@ -31,13 +31,12 @@ exports.create = (req, res) => {
 
 
 exports.candidatsListe = (req, res) => {
-    Candidature.find({ "poste": req.query.idPoste })
+    Candidature.find({ "idPoste": req.query.idPoste })
         .then(candidatures => {
             candidatures.forEach(element => {
-                Candidat.findById(element.candidat, function (err, candidat) {
+                Candidat.findById(element.idCandidat, function (err, candidat) {
                     toreturn.push({"nom":candidat.nom,"prenom":candidat.prenom,
                     "telephone":candidat.telephone,"cv":element.cv})
-
                     res.send(toreturn);
                 });
                
